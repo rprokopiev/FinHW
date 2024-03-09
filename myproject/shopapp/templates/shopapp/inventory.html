@@ -1,0 +1,36 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %} 
+    ShopAppAbout
+{% endblock%}
+
+{% block content %} 
+
+<a href="{% url 'add_product' %}">Add</a>
+
+<table>
+    <tr>
+        <th>Product Picture</th>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+    {% for poduct in inventory %}
+    <tr>
+        <td>{{ poduct.image }}</td>
+        <td>{{ poduct.prod_name }}</td>
+        <td>{{ poduct.description }}</td>
+        <td>{{ poduct.price }}</td>
+        <td>{{ poduct.quantity }}</td>
+        <td><a href="{% url 'edit_product' poduct.id %}">Edit</a></td>
+        <td><a href="{% url 'upload_image' poduct.id %}">Upload Image</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'add_product' %}">Add</a>
+
+
+{% endblock%}

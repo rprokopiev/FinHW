@@ -1,0 +1,43 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %} 
+    ShopAppClientProduct
+{% endblock%}
+
+{% block content %} 
+    <h2>Список заказанных товаров</h2>
+
+    <h3>За последние 7 дней (неделю)</h3>
+    <ul>
+        {% for order in orders %}
+            {% for product in order.products.all %}
+                {% if order.order_date|date:"Y-m-d" >= date.today|date:"Y-m-d"|add:"-7 days" %}
+                    <li>{{ product.prod_name }}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+    <h3>За последние 30 дней (месяц)</h3>
+    <ul>
+        {% for order in orders %}
+            {% for product in order.products.all %}
+                {% if order.order_date|date:"Y-m-d" >= date.today|date:"Y-m-d"|add:"-30 days" %}
+                    <li>{{ product.prod_name }}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+    
+
+    <h3>За последние 365 дней (год)</h3>
+    <ul>
+        {% for order in orders %}
+            {% for product in order.products.all %}
+                {% if order.order_date|date:"Y-m-d" >= date.today|date:"Y-m-d"|add:"-365 days" %}
+                    <li>{{ product.prod_name }}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endblock%}

@@ -1,0 +1,19 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %} 
+    ShopAppClientOrders
+{% endblock%}
+
+{% block content %} 
+    {{ customer.name }}:
+    {% for order in orders %}
+        <h3>Order #{{ order.id }}</h3>
+        <p>Total Amount: {{ order.amount }}</p>
+        <p>Orde date: {{ order.order_date }}</p>
+        <ul>
+            {% for product in order.products.all %}
+                <li>{{ product.prod_name }} - {{ product.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock%}
