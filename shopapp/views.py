@@ -1,34 +1,34 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-import logging
+# import logging
 from .models import Customer, Product, Order
 from .forms import AddProduct, EditProduct, ImageForm
 from django.core.files.storage import FileSystemStorage
 
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 def index(request):
-    logger.info('INDEX page raised')
+    # logger.info('INDEX page raised')
     message = 'Welcome to ShopApp'
     return render(request, 'shopapp/index.html', context={'content': message})
 
 
 def main(request):
-    logger.info('MAIN page raised')
+    # logger.info('MAIN page raised')
     message = 'Main Page of ShopApp'
     return render(request, 'shopapp/main.html', context={'content': message})
 
 
 def about(request):
-    logger.info('ABOUT page raised')
+    # logger.info('ABOUT page raised')
     message = 'About Page of ShopApp'
     return render(request, 'shopapp/main.html', context={'content': message})
 
 
 def client_orders(request, phone):
-    logger.info('client_order page')
+    # logger.info('client_order page')
     client = get_object_or_404(Customer, phone=phone)
     orders = Order.objects.filter(customer=client.pk).order_by('pk')
     context = {
@@ -39,7 +39,7 @@ def client_orders(request, phone):
 
 
 def client_products(request, phone):
-    logger.info('client_products page')
+    # logger.info('client_products page')
     client = get_object_or_404(Customer, phone=phone)
     orders = Order.objects.filter(customer=client.pk).order_by('pk')
     products = [order.products.all() for order in orders]
@@ -52,7 +52,7 @@ def client_products(request, phone):
 
 
 def inventory(request):
-    logger.info('inventory page')
+    # logger.info('inventory page')
     inventory = Product.objects.all().order_by('prod_name')
     return render(request, 'shopapp/inventory.html', context={'inventory': inventory})
 
